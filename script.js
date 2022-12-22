@@ -1,6 +1,8 @@
-cards = [];
+var cards = [];
+var tags = {};
 
 function init() {
+  tags = {};
   container = document.querySelector("#card-container");
   container.innerHTML = "";
 
@@ -31,9 +33,10 @@ function init() {
         datecreated: d.getTime(),
         starred: false,
         url: "",
-        tags: newcardtags.value.split(","),
+        tags: newcardtags.value.split(" "),
       });
       init();
+      handleTags()
     }
   };
 
@@ -91,8 +94,17 @@ function init() {
     // tags
     let card_tags = createElement("div", { class: "tags" });
     for (let t = 0; t < cards[c].tags.length; t++) {
+      // for each tag
       let tag = createElement("div", { class: "tag", innerhtml: cards[c].tags[t] });
+      // append element
       card_tags.append(tag);
+
+      if (tags[cards[c].tags[t]] == null) {
+        // tag is not already tags list
+        tags[cards[c].tags[t]] = 1;
+      } else {
+        tags[cards[c].tags[t]] += 1;
+      }
     }
 
     card.append(card_image);
@@ -122,6 +134,23 @@ document.onpaste = function (pasteEvent) {
     reader.readAsDataURL(blob);
   }
 };
+
+
+
+function handleTags(){
+  document.querySelector('#tags-list').innerHTML = ''
+  for(let t = 0; t < Object.keys(tags).length; t++){
+    // for each tag
+    console.log("'"+ Object.keys(tags)[t] + "': " +tags[Object.keys(tags)[t]])
+    let tagbtn = createElement('button', {class: 'tag'})
+    let tagtext = createElement('p', {class: 'text',innerhtml: `${Object.keys(tags)[t]} `})
+    let tagcount = createElement('p', {class: 'count',innerhtml: `${tags[Object.keys(tags)[t]]}`})
+    tagbtn.append(tagtext)
+    tagbtn.append(tagcount)
+
+    document.querySelector('#tags-list').append(tagbtn)
+  }
+}
 
 // create element
 function createElement(type, params) {

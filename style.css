@@ -5,12 +5,11 @@
   --bg: #efefef;
   --bg-d1: #dfdfdf;
   --bg-d2: #cfcfcf;
-
 }
 
 body {
   margin: 0;
-  background-color: #efefef;
+  background-color: var(--bg);
 }
 
 #app {
@@ -31,6 +30,7 @@ body {
 
 #content {
   padding: 64px;
+  margin-left: 200px;
 }
 
 #card-container {
@@ -41,11 +41,7 @@ body {
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
   max-width: 480px;
-  background-color: transparent;
 }
 
 .card .image {
@@ -105,5 +101,50 @@ body {
 }
 
 #newcardcontainer img {
- border-radius: 8px;
+  border-radius: 8px;
+}
+
+#sidenav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 16px;
+  box-sizing: border-box;
+
+  height: 100vh;
+  width: 200px;
+  background-color: var(--bg-d1);
+}
+
+#tags-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+#tags-list .tag {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 14px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+#tags-list .tag:hover {
+  background-color: var(--bg);
+}
+
+
+#tags-list .tag .count {
+  background-color: #333333;
+  border-radius: 99px;
+  text-align: center;
+  font-size: 12px;
+  min-width: 7px;
+  padding: 1px 5px;
+  color: #efefef;
 }
